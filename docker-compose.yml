@@ -40,10 +40,10 @@ services:
         volumes:
             - dbdata:/var/lib/mysql
         environment:
-            - MYSQL_DATABASE=${DB_DATABASE:-homestead}
-            - MYSQL_USER=${DB_USERNAME:-homestead}
-            - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
-            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+            - MYSQL_DATABASE=${DB_DATABASE:-baselaravel}
+            - MYSQL_USER=${DB_USERNAME:-baselaravel}
+            - MYSQL_PASSWORD=${DB_PASSWORD:-}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-}
         networks:
             - test-network
 
@@ -55,8 +55,8 @@ services:
         environment:
             - PMA_ARBITRARY=1
             - PMA_HOST=${DB_HOST:-db}
-            - PMA_USER=${DB_USERNAME:-homestead}
-            - PMA_PASSWORD=${DB_PASSWORD:-secret}
+            - PMA_USER=${DB_USERNAME:-baselaravel}
+            - PMA_PASSWORD=${DB_PASSWORD:-}
         networks:
             - test-network
 
