@@ -29,5 +29,6 @@ class RoleSedder extends Seeder
         $role2->givePermissionTo($permission2);
         $role3->givePermissionTo($permission3);
         $role3->givePermissionTo($permission4);
+        $role3->givePermissionTo($permission2);
     }
 }

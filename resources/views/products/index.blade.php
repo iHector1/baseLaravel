@@ -10,7 +10,9 @@
             <div class="bg-gray-200 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container mx-auto p-6 bg-gray-200 rounded-lg shadow-lg">
                     <h1 class="text-2xl font-bold mb-6">Products</h1>
+                    @role('Admin')
                     <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">Add Product</a>
+                    @endrole
                     <div class="mb-4 flex">
                         <input type="text" id="searchInput" placeholder="Search by name" class="bg-white shadow-md rounded-lg py-2 px-4 mr-2">
                         <select id="priceFilter" class="bg-white shadow-md rounded-lg py-2 px-4 mr-2">
@@ -43,13 +45,19 @@
                                     <td class="py-2 px-4">{{ $product->price }}</td>
                                     <td class="py-2 px-4">{{ $product->quantity }}</td>
                                     <td class="py-2 px-4 flex space-x-2">
-                                        <a href="{{ route('products.show', $product->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">Show</a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">Edit</a>
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline">
+                                        @can('read')
+                                            <a href="{{ route('products.show', $product->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">Show</a>
+                                        @endcan
+                                        @can('update')
+                                            <a href="{{ route('products.edit', $product->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">Edit</a>
+                                        @endcan
+                                            @can('delete')
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Delete</button>
+                                            <button type="submit" class="bg-gray-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">Delete</button>
                                         </form>
+                                            @endcan
                                     </td>
                                 </tr>
                             @endforeach
